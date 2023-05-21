@@ -55,4 +55,4 @@ def getOverlayPeers():
 if __name__ == '__main__':
     power_simulator = PowerSimulator()
     db = DBConn(power_simulator)
-    app.run(port=8000, host='0.0.0.0', debug=True, threaded=True)
+    app.run(port=8000, threaded=True)

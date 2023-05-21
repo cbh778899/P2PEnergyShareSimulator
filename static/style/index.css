@@ -1,0 +1,272 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+::-webkit-scrollbar {width: 7px;}
+::-webkit-scrollbar-track {opacity: 0;}
+::-webkit-scrollbar-thumb {border-radius: 5px; background-color: rgb(150, 150, 150);}
+::-webkit-scrollbar-thumb:hover {background-color: rgb(128, 128, 128);}
+
+#top-nav-bar {
+    width: 100vw;
+    height: 50px;
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: 5px 0 10px gray;
+    background-color: rgb(98, 224, 98);
+    z-index: 5;
+}
+
+#top-nav-bar .menu-item {
+    width: fit-content;
+    height: fit-content;
+    padding: 0 20px;
+    transition-duration: .5s;
+    position: relative;
+    display: inline-block;
+    background-color: rgb(98, 224, 98);
+    white-space: nowrap;
+}
+#top-nav-bar .menu-item span {
+    line-height: 50px;
+    text-align: center;
+    font-size: x-large;
+    height: 100%;
+    color: white;
+    position: relative;
+}
+#top-nav-bar .menu-item:first-child {margin-left: 10px;}
+#top-nav-bar .menu-item:hover {
+    cursor: pointer;
+    background-color: rgb(79, 185, 79);
+}
+
+#top-nav-bar .menu-item .sub-menu {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    border-radius: 5px;
+    display: none;
+    padding-top: 10px;
+}
+#top-nav-bar .menu-item:hover .sub-menu {display: block;}
+#top-nav-bar .menu-item .sub-menu .menu-item {
+    width: 100%;
+    border-bottom: 1px solid rgb(79, 185, 79);
+    display: block;
+}
+#top-nav-bar .menu-item .sub-menu .menu-item:first-child {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    margin: unset;
+}
+#top-nav-bar .menu-item .sub-menu .menu-item:first-child .arrow-sign {
+    display: block;
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    background-color: rgb(98, 224, 98);
+    transform: rotate(45deg);
+    left: 5px;
+    top: -5px;
+    transition-duration: inherit;
+}
+#top-nav-bar .menu-item .sub-menu .menu-item:first-child:hover .arrow-sign {
+    background-color: rgb(79, 185, 79);
+}
+#top-nav-bar .menu-item .sub-menu .menu-item:last-child {
+    border: none;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+#top-nav-bar .menu-item .sub-menu .read-only-info span {
+    font-size: medium;
+    line-height: 25px;
+}
+#top-nav-bar .menu-item .sub-menu .read-only-info:hover {cursor: unset;}
+
+#main-panel {
+    width: 100vw;
+    height: calc(100vh - 50px);
+    display: block;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    overflow-y: auto;
+}
+
+#main-panel .description {
+    display: block;
+}
+
+#main-panel .account-form {
+    display: block;
+    width: fit-content;
+    position: relative;
+    margin: 2% auto;
+}
+
+#main-panel .account-form .title {
+    display: block;
+    font-size: large;
+    margin: 10px 0;
+}
+
+#main-panel .account-form .user-type-radio {
+    display: inline-block;
+    margin-right: 20px;
+    height: 50px;
+    width: 200px;
+    position: relative;
+    text-align: center;
+    line-height: 50px;
+}
+
+#main-panel .account-form .user-type-radio input {
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    z-index: 2;
+    opacity: 0;
+}
+#main-panel .account-form .user-type-radio div {
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    z-index: 1;
+    border: 2px solid gray;
+    border-radius: 15px;
+    color: rgb(20, 20, 20);
+    box-sizing: border-box;
+}
+#main-panel .account-form .user-type-radio input:checked+div {
+    border-color: dodgerblue;
+}
+
+#main-panel .account-form select,
+#main-panel .account-form .input-area,
+#main-panel .account-form button {
+    width: 428px;
+    height: 50px;
+    border: 2px solid gray;
+    display: block;
+    border-radius: 15px;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+#main-panel .account-form .invalid {border-color: red;}
+
+#main-panel .account-form button {
+    width: 300px;
+    margin-top: 40px;
+    margin-left: 62px;
+    color: black;
+    background: linear-gradient(to right, rgb(98, 224, 98) 50%, white 50%);
+    background-size: 200% 100%;
+    background-position: 100%;
+    transition-duration: .5s;
+}
+
+#main-panel .account-form button:hover {
+    background-position: 0;
+    color: white;
+    cursor: pointer;
+}
+
+#main-panel .account-form button svg {
+    height: 30px;
+    width: 30px;
+}
+
+#main-panel canvas {
+    display: block;
+    border: 1px solid black;
+    position: absolute;
+    left: 50px;
+    top: 50px;
+}
+
+#main-panel #power-summary {
+    display: block;
+    position: absolute;
+    right: 50px;
+    top: 50px;
+}
+
+#main-panel #billing-main {
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+#main-panel #power-summary span,
+#main-panel #billing-main span {
+    display: block;
+    margin-bottom: 10px;
+    font-size: larger;
+}
+
+#main-panel #billing-main .title {
+    font-weight: bold;
+}
+
+#main-panel #power-summary .title,
+#main-panel #billing-main .bill {
+    font-size: xx-large;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+#main-panel #billing-main .bill {
+    margin-top: 10px;
+}
+
+#main-panel #billing-main .description {
+    font-size: medium;
+    margin-bottom: 5px;
+}
+
+#main-panel #billing-main .question {
+    font-size: medium;
+    color: blue;
+}
+#main-panel #billing-main .question:hover {cursor: pointer;}
+
+#main-panel .overlay-div {
+    position: relative;
+    width: 560px;
+    height: 100%;
+    padding: 30px;
+    display: block;
+    box-sizing: border-box;
+    margin: auto;
+}
+#main-panel .flowchart-div {
+    display: block;
+    padding: 30px;
+    margin: auto;
+    max-width: 60%;
+    overflow: hidden;
+}
+#main-panel .flowchart-div .description-div {
+    display: block;
+}
+#main-panel .flowchart-div .description-div .description {margin-bottom: 10px;}
+
+#main-panel .flowchart-div canvas,
+#main-panel .overlay-div canvas {
+    position: relative;
+    margin-bottom: 10px;
+    top: unset;
+    left: unset;
+}
+
+#main-panel .flowchart-div canvas {
+    float: left;
+    margin-right: 20px;
+}

@@ -106,7 +106,7 @@ function signInPage() {
                 <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
             </svg>
         </button>
-        <span class='error' name='error_msg'></span>
+        <span class='error' id='error_msg'></span>
     </form>
     `
 
@@ -135,8 +135,8 @@ function signInPage() {
             request('POST', '/login', res=>{
                 if(!res.login_failed) {
                     afterLogin(res.user_id, user_type)
-                } else if(error_msg) {
-                    event.target.error_msg.textContent = 'Username or password incorrect!';
+                } else {
+                    document.getElementById("error_msg").textContent = 'Username or password incorrect!';
                 }
             }, {user_type: user_type, username: username, password: password})
         }
@@ -176,6 +176,7 @@ function signUpPage() {
                 <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
             </svg>
         </button>
+        <span class='error' id='error_msg'></span>
     </form>
     `
 
@@ -194,36 +195,48 @@ function signUpPage() {
         const confirm_password = event.target.confirm_password.value
 
         let got_error = false
+        let err_msg = '';
         
         if(area === 'NOT_SELECTED') {
             event.target.area.classList.add('invalid')
             event.target.addEventListener("change", 
                 invalidFieldOnChange, {once: true})
             got_error = true
+            err_msg = 'Area not selected!'
         }
         if(!username) {
             event.target.username.classList.add('invalid')
             event.target.username.addEventListener("change", 
                 invalidFieldOnChange, {once: true})
             got_error = true
+            err_msg = 'Please fill in username!';
         }
         if(!email || !/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(email)) {
             event.target.email.classList.add('invalid')
             event.target.email.addEventListener("change", 
                 invalidFieldOnChange, {once: true})
             got_error = true
+            err_msg = 'Email pattern is invalid!';
         }
-        if(!password) {
+        if(!password || 
+           !(password.length >= 8 && !/(?:[0-9])(?:[a-z])(?:[A-Z]).*/g.test(password))) {
+                
             event.target.password.classList.add('invalid')
             event.target.password.addEventListener("change", 
                 invalidFieldOnChange, {once: true})
             got_error = true
+            if(!password) {
+                err_msg = 'Please fill in password!';
+            } else {
+                err_msg = 'Password length should greater than 8 combines letters, capital letters and digits!';
+            }
         }
         if(!confirm_password || password !== confirm_password) {
             event.target.confirm_password.classList.add('invalid')
             event.target.confirm_password.addEventListener("change", 
                 invalidFieldOnChange, {once: true})
             got_error = true
+            err_msg = 'Passwords not match!';
         }
 
         if(!got_error) {
@@ -232,6 +245,8 @@ function signUpPage() {
             }, {user_type: user_type, username: username, 
                 email: email, password: password, 
                 area: area})
+        } else {
+            document.getElementById("error_msg").textContent = err_msg
         }
     }
     

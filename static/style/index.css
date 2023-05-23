@@ -115,6 +115,15 @@ body {
     margin: 10px 0;
 }
 
+#main-panel .account-form .error {
+    font-size: small;
+    color: red;
+    display: block;
+    text-align: center;
+    margin: auto;
+    margin-top: 20px;
+}
+
 #main-panel .account-form .user-type-radio {
     display: inline-block;
     margin-right: 20px;
